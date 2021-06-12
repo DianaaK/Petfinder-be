@@ -11,6 +11,7 @@ import logger from './utils/logger';
 import AuthConfig from './auth/auth.config';
 import usersRoutes from './users/users.routes';
 import authRoutes from './auth/auth.routes';
+import petReportsRoutes from './pet-reports/petReports.routes';
 
 export class Server {
   public app: any;
@@ -37,6 +38,7 @@ export class Server {
     const router = express.Router();
     this.app.use('/auth', authRoutes);
     this.app.use('/users', usersRoutes);
+    this.app.use('/pet-reports', petReportsRoutes);
   }
 
   config() {

@@ -1,6 +1,7 @@
 import UserRepo, { IUser } from './users.model';
 import logger from '../utils/logger';
 import AuthService from '../auth/auth.service';
+import { ObjectID } from 'mongodb';
 
 class UsersService {
   constructor() {}
@@ -14,10 +15,9 @@ class UsersService {
     };
   }
 
-  async add(alert: IUser) {
+  async add(user: IUser) {
     logger.msg('Adding user.');
-
-    const newUser = new UserRepo(alert);
+    const newUser = new UserRepo(user);
     return await newUser.save();
   }
 
@@ -28,10 +28,9 @@ class UsersService {
 
   async update(id: string, updatedUser: IUser) {
     logger.msg('Updating user with id: ' + id);
-
     const user = await this.getById(id);
     const mergedUser = Object.assign(user, updatedUser);
-    await UserRepo.update({ _id: id }, mergedUser, { upsert: true });
+    await UserRepo.updateOne({ _id: id }, mergedUser, { upsert: true });
     return mergedUser;
   }
 }
