@@ -7,12 +7,10 @@ export const SECRET = 'shhhhhhhh';
 
 class AuthService {
   serialize(user: IUser) {
-    const { _id, email, firstname, lastname } = user;
+    const { _id, email, firstname, lastname, profileImage, created } = user;
     return {
       _id,
-      email,
-      firstname,
-      lastname
+      email
     };
   }
 

@@ -4,15 +4,6 @@ import errorHandler from '../utils/errors';
 
 const router = express.Router();
 
-router.post('/login', async (req, res, next) => {
-  try {
-    const authUser = await usersService.login(req, res);
-    res.status(200).send(authUser);
-  } catch (error) {
-    res.status(500).send(errorHandler(error));
-  }
-});
-
 router.post('/', async (req, res, next) => {
   try {
     const newUser = await usersService.add(req.body);

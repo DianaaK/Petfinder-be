@@ -34,6 +34,8 @@ export interface IPetReport extends mongoose.Document {
   age: string;
   media: [string];
   userId: ObjectID;
+  phoneContact?: boolean;
+  emailContact?: boolean;
   address: string;
   coordinates: {
     latitude: number;
@@ -82,6 +84,14 @@ const PetReportRepo = new Schema(
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'users'
+    },
+    phoneContact: {
+      type: Boolean,
+      required: false
+    },
+    emailContact: {
+      type: Boolean,
+      required: false
     },
     address: {
       type: String,

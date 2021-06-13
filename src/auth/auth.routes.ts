@@ -1,6 +1,7 @@
 import * as express from 'express';
 import authService from './auth.service';
 import errorHandler from '../utils/errors';
+import logger from '../utils/logger';
 
 const router = express.Router();
 
@@ -27,6 +28,7 @@ router.post('/login', async (req, res, next) => {
 });
 
 router.get('/logout', (req: any, res, next) => {
+  logger.msg('Logout user');
   req.logout();
   req.session.save((err: any) => {
     if (err) {

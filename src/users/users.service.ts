@@ -1,19 +1,8 @@
 import UserRepo, { IUser } from './users.model';
 import logger from '../utils/logger';
-import AuthService from '../auth/auth.service';
-import { ObjectID } from 'mongodb';
 
 class UsersService {
   constructor() {}
-
-  async login(req: any, res: any) {
-    const authUser: any = await AuthService.login(req, res);
-    const user = await this.getById(authUser.user.id);
-    return {
-      ...authUser,
-      user
-    };
-  }
 
   async add(user: IUser) {
     logger.msg('Adding user.');

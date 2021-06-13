@@ -11,9 +11,10 @@ export interface IUser extends mongoose.Document {
   phone?: string;
   allowNotifications?: boolean;
   deviceId?: string;
-  profilePhoto?: string;
+  profileImage?: string;
   useGoogleMaps?: boolean;
   useSatelliteView?: boolean;
+  created?: string;
 }
 
 const UserRepo = new Schema(
