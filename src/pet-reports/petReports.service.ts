@@ -6,18 +6,20 @@ class PetReportsService {
 
   async getAll() {
     logger.msg('Getting all pet reports.');
-    const reports = await PetReportRepo.find().sort('created').populate('user', 'firstname email phone profileImage');
+    const reports = await PetReportRepo.find()
+      .sort([['created', -1]])
+      .populate('user', 'firstname email phone profileImage');
     return reports;
   }
 
   async getById(id: string) {
     logger.msg('Getting pet report with id: ' + id);
-    return await PetReportRepo.findById(id);
+    return await PetReportRepo.findById(id).populate('user', 'firstname email phone profileImage');
   }
 
   async getByUserId(id: string) {
     logger.msg('Getting pet reports for user with id: ' + id);
-    return await PetReportRepo.find({ userId: id }).sort('created');
+    return await PetReportRepo.find({ user: id }).sort([['created', -1]]);
   }
 
   async add(report: IPetReport) {
