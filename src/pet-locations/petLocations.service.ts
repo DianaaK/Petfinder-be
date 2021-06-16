@@ -6,7 +6,7 @@ class PetLocationsService {
 
   async getByPetId(id: string) {
     logger.msg('Getting pet locations for report with id: ' + id);
-    return await PetLocationRepo.find({ petId: id }).sort('created');
+    return await PetLocationRepo.find({ petId: id }).sort('created').populate('user', 'firstname');
   }
 
   async add(location: IPetLocation) {

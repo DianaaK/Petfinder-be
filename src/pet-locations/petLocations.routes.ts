@@ -4,7 +4,7 @@ import errorHandler from '../utils/errors';
 
 const router = express.Router();
 
-router.get('/pet/:petId', async (req, res, next) => {
+router.get('/:petId', async (req, res, next) => {
   try {
     const locations = await petLocationsService.getByPetId(req.params.petId);
     res.status(200).send(locations);
