@@ -47,6 +47,31 @@ class PetReportsService {
     await PetReportRepo.updateOne({ _id: id }, mergedReport, { upsert: true });
     return mergedReport;
   }
+
+  async favoriteReport(userId: string, reportId: string, favorite: boolean) {
+    logger.msg('Favorite report with id: ' + reportId);
+    const entity: any = await this.getById(reportId);
+    if (favorite && entity) {
+      if (entity.usersFavorite.indexOf(userId) === -1) {
+        entity.usersFavorite.push(userId);
+        await entity.save();
+      }
+    } else if (entity) {
+      entity.usersFavorite = entity.usersFavorite.filter((uid: string) => {
+        return uid.toString() !== userId;
+      });
+      await entity.save();
+    }
+    return entity;
+  }
+
+  async getFavoriteReports(userId: string) {
+    logger.msg('Getting favorite reports for user with id: ' + userId);
+    const reports = await PetReportRepo.find({ usersFavorite: userId })
+      .sort([['created', -1]])
+      .populate('user', 'firstname email phone profileImage');
+    return reports;
+  }
 }
 
 export default new PetReportsService();

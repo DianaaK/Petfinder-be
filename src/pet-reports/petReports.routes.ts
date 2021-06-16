@@ -58,4 +58,22 @@ router.put('/:reportId', async (req, res, next) => {
   }
 });
 
+router.post('/:userId/favorite', async (req, res, next) => {
+  try {
+    const favoriteReport = await petReportsService.favoriteReport(req.params.userId, req.body.reportId, req.body.favorite);
+    res.status(200).send(favoriteReport);
+  } catch (error) {
+    res.status(500).send(errorHandler(error));
+  }
+});
+
+router.get('/:userId/favorites', async (req, res, next) => {
+  try {
+    const favoriteReports = await petReportsService.getFavoriteReports(req.params.userId);
+    res.status(200).send(favoriteReports);
+  } catch (error) {
+    res.status(500).send(errorHandler(error));
+  }
+});
+
 export default router;
