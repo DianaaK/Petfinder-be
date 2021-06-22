@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const reports = await petReportsService.getAll();
+    const reports = await petReportsService.getAll(req.query);
     res.status(200).send(reports);
   } catch (error) {
     res.status(500).send(errorHandler(error));
@@ -24,7 +24,7 @@ router.get('/:reportId', async (req, res, next) => {
 
 router.get('/user/:userId', async (req, res, next) => {
   try {
-    const reports = await petReportsService.getByUserId(req.params.userId);
+    const reports = await petReportsService.getByUserId(req.params.userId, req.query);
     res.status(200).send(reports);
   } catch (error) {
     res.status(500).send(errorHandler(error));
@@ -69,7 +69,7 @@ router.post('/:userId/favorite', async (req, res, next) => {
 
 router.get('/:userId/favorites', async (req, res, next) => {
   try {
-    const favoriteReports = await petReportsService.getFavoriteReports(req.params.userId);
+    const favoriteReports = await petReportsService.getFavoriteReports(req.params.userId, req.query);
     res.status(200).send(favoriteReports);
   } catch (error) {
     res.status(500).send(errorHandler(error));

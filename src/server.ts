@@ -12,6 +12,7 @@ import AuthConfig from './auth/auth.config';
 import usersRoutes from './users/users.routes';
 import authRoutes from './auth/auth.routes';
 import petReportsRoutes from './pet-reports/petReports.routes';
+import petLocationsRoutes from './pet-locations/petLocations.routes';
 
 export class Server {
   public app: any;
@@ -39,6 +40,7 @@ export class Server {
     this.app.use('/auth', authRoutes);
     this.app.use('/users', usersRoutes);
     this.app.use('/pet-reports', petReportsRoutes);
+    this.app.use('/pet-locations', petLocationsRoutes);
   }
 
   config() {

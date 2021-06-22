@@ -1,12 +1,14 @@
 import PetReportRepo, { IPetReport } from './petReports.model';
 import logger from '../utils/logger';
+import { createReportsCriteria } from '../utils/criteria';
 
 class PetReportsService {
   constructor() {}
 
-  async getAll() {
+  async getAll(criteria?: any) {
     logger.msg('Getting all pet reports.');
-    const reports = await PetReportRepo.find()
+    const newCriteria = createReportsCriteria(criteria)
+    const reports = await PetReportRepo.find(newCriteria)
       .sort([['created', -1]])
       .populate('user', 'firstname email phone profileImage');
     return reports;
@@ -17,9 +19,10 @@ class PetReportsService {
     return await PetReportRepo.findById(id).populate('user', 'firstname email phone profileImage');
   }
 
-  async getByUserId(id: string) {
+  async getByUserId(id: string, criteria?: any) {
     logger.msg('Getting pet reports for user with id: ' + id);
-    return await PetReportRepo.find({ user: id }).sort([['created', -1]]);
+    const newCriteria = createReportsCriteria(criteria);
+    return await PetReportRepo.find({ user: id, ...newCriteria }).sort([['created', -1]]);
   }
 
   async add(report: IPetReport) {
@@ -65,9 +68,10 @@ class PetReportsService {
     return entity;
   }
 
-  async getFavoriteReports(userId: string) {
+  async getFavoriteReports(userId: string, criteria?: any) {
     logger.msg('Getting favorite reports for user with id: ' + userId);
-    const reports = await PetReportRepo.find({ usersFavorite: userId })
+    const newCriteria = createReportsCriteria(criteria);
+    const reports = await PetReportRepo.find({ usersFavorite: userId, ...newCriteria })
       .sort([['created', -1]])
       .populate('user', 'firstname email phone profileImage');
     return reports;
