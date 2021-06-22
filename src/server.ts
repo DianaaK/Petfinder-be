@@ -21,7 +21,7 @@ export class Server {
     const s = new Server();
     const httpserver = http.createServer(s.app);
     s.app.set('port', process.env.PORT || '3000');
-    httpserver.listen(parseInt(process.env.PORT || 'asd', 10) || 3000, '0.0.0.0', 0);
+    httpserver.listen(parseInt(process.env.PORT || '3000', 10), '0.0.0.0', 0);
     // tslint:disable-next-line
     logger.server('Started listening on port ' + (process.env.PORT || 3000));
     return s;
