@@ -19,8 +19,8 @@
     "@types/passport": "0.4.2",
     "@types/passport-local": "1.0.33",
     "@types/passport-local-mongoose": "4.0.14",
-    "@types/mongodb": "^3.6.18",
-    "@types/mongoose": "^5.11.97",
+    "@types/mongodb": "3.6.18",
+    "@types/mongoose": "5.11.97",
     "cookie-parser": "1.4.5",
     "cors": "2.8.5",
     "express": "4.16.3",
@@ -38,7 +38,6 @@
   "devDependencies": {
     "nodemon": "^1.12.5",
     "ts-node": "^3.3.0",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.2"
+    "tslint": "^5.8.0"
   }
 }
