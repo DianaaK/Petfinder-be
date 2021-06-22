@@ -2,10 +2,11 @@
   "name": "petfinder-be",
   "version": "1.0.0",
   "description": "backend for petfinder mobile app",
-  "main": "index.ts",
   "scripts": {
     "start": "nodemon --exec ts-node -- ./src/server.ts",
-    "start:prod": "node dist/src/server.js"
+    "prestart:prod": "tsc",
+    "start:prod": "node dist/src/server.js",
+    "watch": "tsc -w"
   },
   "author": "Diana",
   "license": "ISC",

@@ -1,1 +1,1 @@
-web: nodemon --exec ts-node -- ./src/server.ts
+web: npm run start:prod
