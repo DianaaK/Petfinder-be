@@ -38,7 +38,7 @@ router.get('/logout', (req: any, res, next) => {
   });
 });
 
-router.post('/changePass', async (req, res, next) => {
+router.post('/change-password', async (req, res, next) => {
   try {
     const changedPass = await authService.changePass(req, res);
     res.status(200).send(changedPass);
