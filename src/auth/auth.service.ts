@@ -66,7 +66,7 @@ class AuthService {
     return new Promise((resolve, reject) => {
       try {
         passport.authenticate('local', { session: true }, (err, user, info) => {
-          logger.msg('Change user password with email: ');
+          logger.msg('Change user password with email: ' + user.email);
           if (err) {
             return reject(err);
           }

@@ -1,4 +1,4 @@
-import PetReportRepo, { IPetReport } from './petReports.model';
+import PetReportRepo, { IPetReport, ReportStatus } from './petReports.model';
 import logger from '../utils/logger';
 import { createReportsCriteria } from '../utils/criteria';
 
@@ -7,8 +7,8 @@ class PetReportsService {
 
   async getAll(criteria?: any) {
     logger.msg('Getting all pet reports.');
-    const newCriteria = createReportsCriteria(criteria)
-    const reports = await PetReportRepo.find(newCriteria)
+    const newCriteria = createReportsCriteria(criteria);
+    const reports = await PetReportRepo.find({ status: ReportStatus.ACTIVE, ...newCriteria })
       .sort([['created', -1]])
       .populate('user', 'firstname email phone profileImage');
     return reports;
@@ -36,7 +36,7 @@ class PetReportsService {
     logger.msg('Deleting report with id: ' + id);
     const report = await this.getById(id);
     if (report) {
-      await PetReportRepo.remove({ _id: id });
+      await PetReportRepo.deleteOne({ _id: id });
       return report;
     } else {
       throw { code: 'NOT_FOUND', message: 'report not found' };
@@ -71,7 +71,7 @@ class PetReportsService {
   async getFavoriteReports(userId: string, criteria?: any) {
     logger.msg('Getting favorite reports for user with id: ' + userId);
     const newCriteria = createReportsCriteria(criteria);
-    const reports = await PetReportRepo.find({ usersFavorite: userId, ...newCriteria })
+    const reports = await PetReportRepo.find({ status: ReportStatus.ACTIVE, usersFavorite: userId, ...newCriteria })
       .sort([['created', -1]])
       .populate('user', 'firstname email phone profileImage');
     return reports;
