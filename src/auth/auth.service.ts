@@ -29,6 +29,12 @@ class AuthService {
             password: password
           }
         );
+        if (regUser) {
+          return {
+            email: regUser.email,
+            password: password
+          };
+        }
       });
     } catch (error) {
       throw { ERROR: error };
