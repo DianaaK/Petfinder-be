@@ -2,7 +2,7 @@ import PetLocationRepo, { IPetLocation } from './petLocations.model';
 import logger from '../utils/logger';
 import petReportsService from '../pet-reports/petReports.service';
 import usersService from '../users/users.service';
-import { NotificationsService } from '../utils/notifications';
+import NotificationsService from '../utils/notifications';
 
 class PetLocationsService {
   constructor() {}
