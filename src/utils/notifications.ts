@@ -1,6 +1,4 @@
-import * as request from 'request';
-
-import logger from '../utils/logger';
+const https = require('https');
 
 const APP_KEY = 'NDczM2ViNmEtMzI5Zi00ZWJiLTk0ZmEtZjJjYTc2NGQ1Zjkw';
 const APP_ID = '75c10a26-b37a-4efa-9b72-fc70b51ca8a5';
@@ -20,9 +18,6 @@ const options = {
 };
 
 export class NotificationsService {
-  static sendNotificationTo(arg0: string[], title: any, description: any, object: object) {
-    throw new Error('Method not implemented.');
-  }
   constructor() {}
 
   sendNotificationTo = (player_ids: string[], title: string, message: string, object: object) => {
@@ -35,19 +30,14 @@ export class NotificationsService {
       android_visibility: 1
     };
 
-    const req = request(options, (error, response, body) => {
-      if (error) {
-        throw {
-          code: 'NOTIFICATION_FAILED',
-          message: 'Cannot send notification'
-        };
-      }
-      if (response.statusCode === 200) {
-        logger.msg('Notification sent');
-      }
+    const req = https.request(options, function (res) {
+      res.on('data', function (data) {
+        console.log('Response:');
+        console.log(JSON.parse(data));
+      });
     });
 
-    req.on('error', (e) => {
+    req.on('error', function (e) {
       console.log('ERROR:');
       console.log(e);
     });
