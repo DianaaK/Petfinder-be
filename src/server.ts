@@ -36,6 +36,7 @@ export class Server {
 
   // define rotues
   routes() {
+    console.log('new')
     const router = express.Router();
     this.app.use('/auth', authRoutes);
     this.app.use('/users', usersRoutes);
