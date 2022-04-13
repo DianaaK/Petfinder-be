@@ -3,11 +3,11 @@ import { sign } from 'jsonwebtoken';
 import logger from '../utils/logger';
 import passport from 'passport';
 
-export const SECRET = 'shhhhhhhh';
+const SECRET = process.env.SECRET_TOKEN || '';
 
 class AuthService {
   serialize(user: IUser) {
-    const { _id, email, firstname, lastname, profileImage, created } = user;
+    const { _id, email } = user;
     return {
       _id,
       email

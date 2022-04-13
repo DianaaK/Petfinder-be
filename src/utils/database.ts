@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const DB_URL = 'mongodb+srv://diana:petfinder123456@petfinder.gfa23.mongodb.net/PetFinder';
+const DB_URL = process.env.DB_URL || '';
 
 // mongoose
 (mongoose as any).Promise = global.Promise;

@@ -1,7 +1,7 @@
 const https = require('https');
 
-const APP_KEY = 'NDczM2ViNmEtMzI5Zi00ZWJiLTk0ZmEtZjJjYTc2NGQ1Zjkw';
-const APP_ID = '75c10a26-b37a-4efa-9b72-fc70b51ca8a5';
+const APP_KEY = process.env.ONE_SIGNAL_KEY;
+const APP_ID = process.env.ONE_SIGNAL_ID;
 
 const headers = {
   'Content-Type': 'application/json; charset=utf-8',
